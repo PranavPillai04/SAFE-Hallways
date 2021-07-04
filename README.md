@@ -11,3 +11,4 @@ A simulated video displaying tracer students on one floor of the building is sho
 
 https://user-images.githubusercontent.com/85823366/124393730-6ff41c80-dcc1-11eb-9960-379cdfaa0302.mp4
 
+The results are read into a Google Script which creates easy-to-understand tables for all faculty and staff to be able to access.
