@@ -8,5 +8,6 @@ S.A.F.E. creates the most likely paths and speeds for each student according to 
 A total of 10 epochs are conducted over the training data to fit the model as necessary.
 
 A simulated video displaying tracer students on one floor of the building is shown below:
+
 https://user-images.githubusercontent.com/85823366/124393730-6ff41c80-dcc1-11eb-9960-379cdfaa0302.mp4
 
