@@ -1,0 +1,142 @@
+function initializeDocument() {
+  var doc = DocumentApp.getActiveDocument();
+  var body = doc.getBody();
+  body.setMarginLeft(70);
+  
+  var roomArray = [11];
+  //127, 203
+
+//  var reader = new FileReader();
+  for (var i in roomArray) {
+    addRoom(doc, body, roomArray[i]);
+  }
+  //addRoom(doc, body, 203);
+}
+
+function addRoom(doc, body, roomNum) {
+  body.appendPageBreak();
+  var newPara = body.appendParagraph("Room " + roomNum + ": ");
+  var position = doc.newPosition(newPara, 0);
+  var bookmark = doc.addBookmark(position);
+  
+  var tableOfContents = body.getTables()[0];
+  tableOfContents.findText(roomNum).getElement().asText().setLinkUrl('#bookmark=' + bookmark.getId());
+  
+  var tableADays = body.getTables()[1];
+  console.log(tableADays.findText("Room " + roomNum + ":").getElement.asText().position)
+
+  var text = body.editAsText();
+  
+  text.appendText('\n');
+  text.appendText('\n');
+  
+  var body = DocumentApp.getActiveDocument().getBody();
+  
+  var periodHeadersArray = [['Period 1A', 'Period 2A', 'Period 3A', 'Period 4A']];
+  
+  var table = body.appendTable(periodHeadersArray);
+
+  var style = {};
+  style[DocumentApp.Attribute.HORIZONTAL_ALIGNMENT] =
+    DocumentApp.HorizontalAlignment.CENTER;
+  style[DocumentApp.Attribute.FONT_FAMILY] = 'Arial';
+  style[DocumentApp.Attribute.FONT_SIZE] = 11;
+  style[DocumentApp.Attribute.BOLD] = true;
+  
+  table.setBorderWidth(1);
+  table.setAttributes(style);
+  
+  //new table
+  var timeStudentArray = [
+    ["9:15","9:20", "9:25", "10:30", "10:35", "10:40", "11:45", "11:50", "11:55", "1:00", "1:05", "1:10"],
+    ["s1","s2","s3","s3","s2","s1","s1","s3","s2", "s3", "s3", "s2"]
+    ];
+  
+  table = body.appendTable(timeStudentArray);
+  var style = {};
+  style[DocumentApp.Attribute.HORIZONTAL_ALIGNMENT] =
+    DocumentApp.HorizontalAlignment.CENTER;
+  style[DocumentApp.Attribute.FONT_FAMILY] = 'Arial';
+  style[DocumentApp.Attribute.FONT_SIZE] = 7;
+  style[DocumentApp.Attribute.BOLD] = false;
+  style[DocumentApp.Attribute.MARGIN_BOTTOM] = 0;
+  
+  table.setAttributes(style);
+  
+  /*
+  //customized border option
+  const index = body.getChildIndex(table);
+  const documentId = doc.getId();
+  doc.saveAndClose();
+  const tableStart = Docs.Documents.get(documentId).body.content[index+1].startIndex;
+  const tempStyle = {width: {magnitude :1, unit: "PT"}, dashStyle: "SOLID", color: {color: {rgbColor: {blue: 0}}}};
+  const resource = {requests: [
+  {updateTableCellStyle: {
+    tableStartLocation: {index: tableStart},
+    tableCellStyle: {borderTop: tempStyle, borderBottom: tempStyle, borderLeft: tempStyle, borderRight: tempStyle},
+    fields: "borderTop,borderBottom,borderLeft,borderRight"
+  }},
+  {updateTableCellStyle: {
+    tableRange: {
+      tableCellLocation: {tableStartLocation: {index: tableStart}, rowIndex: 0, columnIndex: 0}, rowSpan: 1, columnSpan: 1},
+      tableCellStyle: {
+        borderRight: {dashStyle: "SOLID", width: {magnitude: 3, unit: "PT"}, color: {color: {rgbColor: {red: 1}}}}
+      },
+      fields: "borderRight"
+  }}
+]};
+Docs.Documents.batchUpdate(resource, documentId);
+  
+  DocumentApp.openById(doc.getId());
+  
+  body = doc.getBody();
+  text = body.editAsText();
+  */
+  
+  text.appendText('\n');
+  text.appendText('\n');
+  
+  periodHeadersArray = [['Period 1B', 'Period 2B', 'Period 3B', 'Period 4B']];
+  
+  table = body.appendTable(periodHeadersArray);
+
+  style = {};
+  style[DocumentApp.Attribute.HORIZONTAL_ALIGNMENT] =
+    DocumentApp.HorizontalAlignment.CENTER;
+  style[DocumentApp.Attribute.FONT_FAMILY] = 'Arial';
+  style[DocumentApp.Attribute.FONT_SIZE] = 11;
+  style[DocumentApp.Attribute.BOLD] = true;
+  style[DocumentApp.Attribute.MARGIN_TOP] = 0;
+  
+  table.setBorderWidth(1);
+  table.setAttributes(style);
+  
+  timeStudentArray = [
+    ["9:15","9:18", "9:21", "10:30", "10:33", "10:36", "11:45", "11:48", "11:51", "1:00", "1:03", "1:06"],
+    ["s124","s2142","s23143","s243","s2124","s2341","s1241","s324","s2214", "s3124", "s1243", "s1432"]
+    ];
+  
+  table = body.appendTable(timeStudentArray);
+  var style = {};
+  style[DocumentApp.Attribute.HORIZONTAL_ALIGNMENT] =
+    DocumentApp.HorizontalAlignment.CENTER;
+  style[DocumentApp.Attribute.FONT_FAMILY] = 'Arial';
+  style[DocumentApp.Attribute.FONT_SIZE] = 7;
+  style[DocumentApp.Attribute.BOLD] = false;
+  
+  table.setAttributes(style);
+  
+  
+  /*
+  //equalized table spacing optional
+  var docWidth = 600;       
+  for(var i=0; i<table.getNumChildren(); i++) { //loop thru rows
+    for(var j=0; j<table.getRow(i).getNumChildren(); j++) { //loop thru columns
+      var cols = table.getRow(i).getCell(j);
+      cols.setWidth((docWidth / table.getRow(i).getNumChildren()));
+    }
+  }
+  */
+  
+  
+}
